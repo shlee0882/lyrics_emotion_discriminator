@@ -161,7 +161,7 @@ export default function Page() {
   const [lyrics, setLyrics] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalyzeResponseT | null>(null);
-  const [err, setErr] = useState<string | null>(null);
+  const [, setErr] = useState<string | null>(null);
   const [filter, setFilter] = useState<Sentiment | "all">("all");
 
   const filtered = useMemo(() => {
@@ -181,7 +181,10 @@ export default function Page() {
       const data = await r.json();
       if (!r.ok) throw new Error(data?.error || "fail");
       setResult(data);
-    } catch(e:any){ setErr(e.message); }
+    } catch(e: unknown){ 
+      const errorMessage = e instanceof Error ? e.message : "알 수 없는 오류가 발생했습니다.";
+      setErr(errorMessage); 
+    }
     finally { setLoading(false); }
   }
 
@@ -258,7 +261,7 @@ export default function Page() {
             <select
               className="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               value={filter}
-              onChange={(e)=>setFilter(e.target.value as any)}>
+              onChange={(e)=>setFilter(e.target.value as Sentiment | "all")}>
               <option value="all">전체</option>
               <option value="positive">긍정</option>
               <option value="neutral">중립</option>

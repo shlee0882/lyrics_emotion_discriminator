@@ -6,10 +6,10 @@ export function splitLines(lyrics: string, size = 20) {
 }
 
 export async function withRetry<T>(fn: () => Promise<T>, max = 2) {
-  let lastErr: any;
+  let lastErr: unknown;
   for (let i = 0; i <= max; i++) {
     try { return await fn(); }
-    catch (e:any) { lastErr = e; await new Promise(r => setTimeout(r, 600 * (i + 1))); }
+    catch (e: unknown) { lastErr = e; await new Promise(r => setTimeout(r, 600 * (i + 1))); }
   }
   throw lastErr;
 }
