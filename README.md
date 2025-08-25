@@ -66,7 +66,7 @@ npm install
 
 ### 환경 변수 설정
 ```bash
-OPENAI_API_KEY=sk-xxxxxx
+OPENAI_API_KEY=sk-xxxxx
 ```
 
 ### 로컬 실행
