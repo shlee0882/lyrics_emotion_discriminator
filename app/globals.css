@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* 화면 높이 확실히 채우기 (일부 환경에서 필요) */
+html, body, :root { height: 100%; }
+
+/* 모바일 최적화 */
+@media (max-width: 640px) {
+  body {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/* 중앙 정렬 보완 */
+@media (max-width: 1023px) {
+  /* 모바일/태블릿에서 완전한 중앙 정렬 */
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+/* 반응형 여백 조정 */
+@media (min-width: 1024px) {
+  /* PC에서 적절한 여백 유지 */
+  main {
+    margin: 0 auto;
+  }
+}
+
+/* 스켈레톤 애니메이션 */
+@keyframes shimmer {
+  0% { background-position: -450px 0; }
+  100% { background-position: 450px 0; }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #f2f3f5;
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.8) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 450px 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+/* 모바일 터치 최적화 */
+button, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 모바일에서 스크롤 부드럽게 */
+html {
+  scroll-behavior: smooth;
+}
